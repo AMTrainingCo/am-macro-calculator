@@ -115,6 +115,13 @@ WIDGET_HTML = r"""<!doctype html>
   .m.p { background: #FCEAF5; border-color: #F6D3EA; }
   .m.c { background: #EAF8FC; border-color: #CFEBF3; }
   .cta { background: #EAF8FC; border-color: #CFEBF3; }
+  /* clearer outlines on fields and toggles */
+  input, select { border: 2px solid #8FA3B3; background: #FFFFFF; }
+  input::placeholder { color: #98A2B3; }
+  input:focus, select:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(24,176,208,.25); }
+  .seg { border: 2px solid #8FA3B3; }
+  .seg button { background: #FFFFFF; }
+  .seg button.on { background: var(--cyan); }
 </style>
 </head>
 <body>
@@ -497,6 +504,13 @@ LIFT_WIDGET_HTML = r"""<!doctype html>
   .m.p { background: #FCEAF5; border-color: #F6D3EA; }
   .m.c { background: #EAF8FC; border-color: #CFEBF3; }
   .cta { background: #EAF8FC; border-color: #CFEBF3; }
+  /* clearer outlines on fields and toggles */
+  input, select { border: 2px solid #8FA3B3; background: #FFFFFF; }
+  input::placeholder { color: #98A2B3; }
+  input:focus, select:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(24,176,208,.25); }
+  .seg { border: 2px solid #8FA3B3; }
+  .seg button { background: #FFFFFF; }
+  .seg button.on { background: var(--cyan); }
 </style>
 </head>
 <body>
@@ -928,6 +942,13 @@ HUB_WIDGET_HTML = r"""<!doctype html>
   .m.p { background: #FCEAF5; border-color: #F6D3EA; }
   .m.c { background: #EAF8FC; border-color: #CFEBF3; }
   .cta { background: #EAF8FC; border-color: #CFEBF3; }
+  /* clearer outlines on fields and toggles */
+  input, select { border: 2px solid #8FA3B3; background: #FFFFFF; }
+  input::placeholder { color: #98A2B3; }
+  input:focus, select:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(24,176,208,.25); }
+  .seg { border: 2px solid #8FA3B3; }
+  .seg button { background: #FFFFFF; }
+  .seg button.on { background: var(--cyan); }
 
   header { display: none; }
   :host { padding: 0; }
@@ -1143,6 +1164,13 @@ HUB_WIDGET_HTML = r"""<!doctype html>
   .m.p { background: #FCEAF5; border-color: #F6D3EA; }
   .m.c { background: #EAF8FC; border-color: #CFEBF3; }
   .cta { background: #EAF8FC; border-color: #CFEBF3; }
+  /* clearer outlines on fields and toggles */
+  input, select { border: 2px solid #8FA3B3; background: #FFFFFF; }
+  input::placeholder { color: #98A2B3; }
+  input:focus, select:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(24,176,208,.25); }
+  .seg { border: 2px solid #8FA3B3; }
+  .seg button { background: #FFFFFF; }
+  .seg button.on { background: var(--cyan); }
 
   header { display: none; }
   :host { padding: 0; }
