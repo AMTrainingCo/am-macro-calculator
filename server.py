@@ -155,22 +155,22 @@ WIDGET_HTML = r"""<!doctype html>
     <div class="row three">
       <div>
         <label for="age">AGE</label>
-        <input id="age" type="number" inputmode="numeric" min="18" max="90" placeholder="28" />
+        <input id="age" type="number" inputmode="numeric" min="18" max="90" placeholder="Age" />
       </div>
       <div>
         <label for="weight" id="weightLabel">WEIGHT (LB)</label>
-        <input id="weight" type="number" inputmode="decimal" placeholder="180" />
+        <input id="weight" type="number" inputmode="decimal" placeholder="Weight" />
       </div>
       <div id="heightImperial">
         <label>HEIGHT (FT / IN)</label>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-          <input id="ft" type="number" inputmode="numeric" min="3" max="8" placeholder="5" aria-label="feet" />
-          <input id="inch" type="number" inputmode="numeric" min="0" max="11" placeholder="10" aria-label="inches" />
+          <input id="ft" type="number" inputmode="numeric" min="3" max="8" placeholder="ft" aria-label="feet" />
+          <input id="inch" type="number" inputmode="numeric" min="0" max="11" placeholder="in" aria-label="inches" />
         </div>
       </div>
       <div id="heightMetric" style="display:none">
         <label for="cm">HEIGHT (CM)</label>
-        <input id="cm" type="number" inputmode="decimal" placeholder="178" />
+        <input id="cm" type="number" inputmode="decimal" placeholder="Height" />
       </div>
     </div>
 
@@ -316,7 +316,7 @@ WIDGET_HTML = r"""<!doctype html>
     units = v;
     const imp = v === "imperial";
     $("weightLabel").textContent = imp ? "WEIGHT (LB)" : "WEIGHT (KG)";
-    $("weight").placeholder = imp ? "180" : "82";
+    $("weight").placeholder = "Weight";
     $("heightImperial").style.display = imp ? "" : "none";
     $("heightMetric").style.display = imp ? "none" : "";
   });
@@ -547,11 +547,11 @@ LIFT_WIDGET_HTML = r"""<!doctype html>
       <div class="row two">
         <div>
           <label for="weight" id="weightLabel">WEIGHT LIFTED (LB)</label>
-          <input id="weight" type="number" inputmode="decimal" placeholder="225" />
+          <input id="weight" type="number" inputmode="decimal" placeholder="Weight" />
         </div>
         <div>
           <label for="reps">REPS DONE (1 TO 12)</label>
-          <input id="reps" type="number" inputmode="numeric" min="1" max="12" placeholder="5" />
+          <input id="reps" type="number" inputmode="numeric" min="1" max="12" placeholder="Reps" />
         </div>
       </div>
       <div class="hint" style="margin:-4px 0 12px">Use a hard set where you could not do many more reps. Fewer reps gives a better estimate.</div>
@@ -561,7 +561,7 @@ LIFT_WIDGET_HTML = r"""<!doctype html>
       <div class="row">
         <div>
           <label for="target" id="targetLabel">TOTAL WEIGHT ON THE BAR (LB)</label>
-          <input id="target" type="number" inputmode="decimal" placeholder="225" />
+          <input id="target" type="number" inputmode="decimal" placeholder="Total weight" />
         </div>
       </div>
     </div>
@@ -695,8 +695,8 @@ LIFT_WIDGET_HTML = r"""<!doctype html>
     const U = unit.toUpperCase();
     $("weightLabel").textContent = "WEIGHT LIFTED (" + U + ")";
     $("targetLabel").textContent = "TOTAL WEIGHT ON THE BAR (" + U + ")";
-    $("weight").placeholder = unit === "lb" ? "225" : "100";
-    $("target").placeholder = unit === "lb" ? "225" : "100";
+    $("weight").placeholder = "Weight";
+    $("target").placeholder = "Total weight";
     $("bar").placeholder = unit === "lb" ? "45" : "20";
     $("barHint").textContent = "Leave blank for a standard " + (unit === "lb" ? "45 lb" : "20 kg") + " bar.";
   }
@@ -983,22 +983,22 @@ HUB_WIDGET_HTML = r"""<!doctype html>
     <div class="row three">
       <div>
         <label for="age">AGE</label>
-        <input id="age" type="number" inputmode="numeric" min="18" max="90" placeholder="28" />
+        <input id="age" type="number" inputmode="numeric" min="18" max="90" placeholder="Age" />
       </div>
       <div>
         <label for="weight" id="weightLabel">WEIGHT (LB)</label>
-        <input id="weight" type="number" inputmode="decimal" placeholder="180" />
+        <input id="weight" type="number" inputmode="decimal" placeholder="Weight" />
       </div>
       <div id="heightImperial">
         <label>HEIGHT (FT / IN)</label>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-          <input id="ft" type="number" inputmode="numeric" min="3" max="8" placeholder="5" aria-label="feet" />
-          <input id="inch" type="number" inputmode="numeric" min="0" max="11" placeholder="10" aria-label="inches" />
+          <input id="ft" type="number" inputmode="numeric" min="3" max="8" placeholder="ft" aria-label="feet" />
+          <input id="inch" type="number" inputmode="numeric" min="0" max="11" placeholder="in" aria-label="inches" />
         </div>
       </div>
       <div id="heightMetric" style="display:none">
         <label for="cm">HEIGHT (CM)</label>
-        <input id="cm" type="number" inputmode="decimal" placeholder="178" />
+        <input id="cm" type="number" inputmode="decimal" placeholder="Height" />
       </div>
     </div>
 
@@ -1208,11 +1208,11 @@ HUB_WIDGET_HTML = r"""<!doctype html>
       <div class="row two">
         <div>
           <label for="weight" id="weightLabel">WEIGHT LIFTED (LB)</label>
-          <input id="weight" type="number" inputmode="decimal" placeholder="225" />
+          <input id="weight" type="number" inputmode="decimal" placeholder="Weight" />
         </div>
         <div>
           <label for="reps">REPS DONE (1 TO 12)</label>
-          <input id="reps" type="number" inputmode="numeric" min="1" max="12" placeholder="5" />
+          <input id="reps" type="number" inputmode="numeric" min="1" max="12" placeholder="Reps" />
         </div>
       </div>
       <div class="hint" style="margin:-4px 0 12px">Use a hard set where you could not do many more reps. Fewer reps gives a better estimate.</div>
@@ -1222,7 +1222,7 @@ HUB_WIDGET_HTML = r"""<!doctype html>
       <div class="row">
         <div>
           <label for="target" id="targetLabel">TOTAL WEIGHT ON THE BAR (LB)</label>
-          <input id="target" type="number" inputmode="decimal" placeholder="225" />
+          <input id="target" type="number" inputmode="decimal" placeholder="Total weight" />
         </div>
       </div>
     </div>
@@ -1372,7 +1372,7 @@ HUB_WIDGET_HTML = r"""<!doctype html>
     units = v;
     const imp = v === "imperial";
     $("weightLabel").textContent = imp ? "WEIGHT (LB)" : "WEIGHT (KG)";
-    $("weight").placeholder = imp ? "180" : "82";
+    $("weight").placeholder = "Weight";
     $("heightImperial").style.display = imp ? "" : "none";
     $("heightMetric").style.display = imp ? "none" : "";
   });
@@ -1521,8 +1521,8 @@ HUB_WIDGET_HTML = r"""<!doctype html>
     const U = unit.toUpperCase();
     $("weightLabel").textContent = "WEIGHT LIFTED (" + U + ")";
     $("targetLabel").textContent = "TOTAL WEIGHT ON THE BAR (" + U + ")";
-    $("weight").placeholder = unit === "lb" ? "225" : "100";
-    $("target").placeholder = unit === "lb" ? "225" : "100";
+    $("weight").placeholder = "Weight";
+    $("target").placeholder = "Total weight";
     $("bar").placeholder = unit === "lb" ? "45" : "20";
     $("barHint").textContent = "Leave blank for a standard " + (unit === "lb" ? "45 lb" : "20 kg") + " bar.";
   }
