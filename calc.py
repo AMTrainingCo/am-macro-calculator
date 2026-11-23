@@ -18,7 +18,7 @@ FLOOR = {"male": 1500, "female": 1200}
 
 CTA = (
     "These are starting numbers. Want a plan built around your body, schedule and gym? "
-    "Apply at AM Training Co: https://forms.gle/8LbdUhkZcYXRcBNu9 or follow @aaron_munoz1 on Instagram."
+    "Apply at AM Training Co: https://forms.gle/8LbdUhkZcYXRcBNu9 or follow @aaron_munoz1 on Instagram and AM Training Co on Facebook."
 )
 
 
