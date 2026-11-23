@@ -1,25 +1,44 @@
-# AM Training Co Macro Calculator (ChatGPT app / MCP server)
+# AM Training Co Calculators (ChatGPT app / MCP server)
 
-Takes sex, age (18+), weight, height, goal, activity (and optional body fat %) and returns
-daily calories + protein/carbs/fat. Stores nothing. Ends with your intake form link and @aaron_munoz1.
+Free calculators from AM Training Co, in one ChatGPT custom plugin. Nothing is stored. Each result ends with the coaching application form link, @aaron_munoz1 on Instagram and AM Training Co on Facebook.
+
+## Calculators
+
+**Macro calculator.** Takes sex, age (18+), weight, height, goal, activity level (and optional body fat %) and returns daily calories plus protein, carbs and fat.
+
+**Lift calculator.** Estimates a one-rep max from a recent set (weight and reps), then shows working weights from 50% to 95% with the plates to load on each side of the bar. A Plate math tab shows the plates for any target weight.
 
 ## Files
-- calc.py       the math (Mifflin-St Jeor, activity factor, goal adjustment, 1 g protein per lb lean mass or body weight)
-- server.py     the MCP server (one tool: calculate_macros), endpoint /mcp
-- test_calc.py  checks the math:  python3 test_calc.py
+
+- `calc.py`: macro math (Mifflin-St Jeor, activity factor, goal adjustment, 1 g protein per lb lean mass or body weight)
+- `lift_calc.py`: lift math (Epley and Brzycki averaged for the 1RM, plate rounding to what can be loaded)
+- `server.py`: the MCP server. Endpoint is `/mcp`. Tools: `open_macro_calculator`, `calculate_macros`, `open_lift_calculator`, `calculate_lift`, `plate_math`. Both calculator screens are built into this file.
+- `test_calc.py`: checks the macro math. Run `python3 test_calc.py`
+- `requirements.txt`: Python packages
+- `icon.png`: plugin icon
 
 ## Run locally
-    pip install -r requirements.txt
-    PORT=8000 python3 server.py        # serves http://localhost:8000/mcp
 
-## Before it goes public (not done yet)
-1. Host it at a stable public HTTPS URL (any free-tier Python host works) with the /mcp path.
-2. Test it in ChatGPT developer mode using that URL.
-3. Submit through the OpenAI developer portal. Expect to need: a privacy policy page, a support contact,
-   test prompts, and a branded name. Check their current submission guidelines first.
+```
+pip install -r requirements.txt
+python3 server.py
+```
 
-## Numbers (all adjustable in calc.py)
-- Goal: build muscle +10%, lose fat -20%, maintain 0%. Calorie floor 1500 (male) / 1200 (female).
-- Protein target: 1 g per lb of lean mass if body fat % given, otherwise 1 g per lb of body weight, kept inside 1.6-2.2 g/kg of body weight.
-  Fat loss: 1.1 g per lb target inside 2.0-2.6 g/kg. The range is returned alongside the target.
-- Fat: 25% of calories. Carbs: the rest.
+The server listens on `/mcp`.
+
+## Deploy
+
+Hosted free on Render. Pushing to `main` redeploys automatically. The free host sleeps when idle, so the first request can take up to a minute.
+
+## Connect in ChatGPT
+
+Do this on a computer, not a phone.
+
+1. Open chatgpt.com and go to chatgpt.com/plugins.
+2. Click +, then Add custom MCP server.
+3. Name: AM Training Co Calculators
+4. Server URL: https://am-macro-calculator.onrender.com/mcp
+5. Authentication: No authentication. Save.
+6. In a new chat, type "Open the macro calculator" or "Open the lift calculator".
+
+These are estimates, not medical advice.
