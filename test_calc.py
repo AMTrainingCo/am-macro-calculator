@@ -34,4 +34,12 @@ for bad in [dict(age=17), dict(weight=10), dict(height=300)]:
     args.update(bad)
     try: calc.calculate(**args); raise SystemExit("should have failed "+str(bad))
     except calc.InputError: pass
+# experience only changes the build-muscle surplus
+b = calc.calculate("male", 28, 180, "lb", 70, "in", "build_muscle", "moderate", experience="beginner")["calories"]
+i = calc.calculate("male", 28, 180, "lb", 70, "in", "build_muscle", "moderate", experience="intermediate")["calories"]
+a = calc.calculate("male", 28, 180, "lb", 70, "in", "build_muscle", "moderate", experience="advanced")["calories"]
+assert b == 3055 and a < i < b, (b, i, a)
+assert calc.calculate("male", 28, 180, "lb", 70, "in", "lose_fat", "moderate", experience="advanced")["calories"] == calc.calculate("male", 28, 180, "lb", 70, "in", "lose_fat", "moderate")["calories"]
+try: calc.calculate("male", 28, 180, "lb", 70, "in", "build_muscle", "moderate", experience="pro"); raise SystemExit("should fail")
+except calc.InputError: pass
 print("calc tests passed", r["calories"], r["protein_g"], r["carbs_g"], r["fat_g"])

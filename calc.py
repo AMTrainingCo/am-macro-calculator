@@ -16,6 +16,14 @@ GOALS = {
 }
 FLOOR = {"male": 1500, "female": 1200}
 
+# Muscle-building surplus by training experience. Beginners can use a bigger surplus; advanced
+# lifters gain slowly, so a smaller one adds less fat. No experience given keeps the old +10%.
+EXPERIENCE_SURPLUS = {
+    "beginner": 0.10,
+    "intermediate": 0.075,
+    "advanced": 0.05,
+}
+
 CTA = (
     "These are starting numbers. Want a plan built around your body, schedule and gym? "
     "Apply at AM Training Co: https://forms.gle/8LbdUhkZcYXRcBNu9 or follow @aaron_munoz1 on Instagram and AM Training Co on Facebook."
@@ -26,7 +34,7 @@ class InputError(ValueError):
     pass
 
 
-def calculate(sex, age, weight, weight_unit, height, height_unit, goal, activity, body_fat_percent=None):
+def calculate(sex, age, weight, weight_unit, height, height_unit, goal, activity, body_fat_percent=None, experience=None):
     sex = str(sex).lower().strip()
     goal = str(goal).lower().strip()
     activity = str(activity).lower().strip()
@@ -37,6 +45,9 @@ def calculate(sex, age, weight, weight_unit, height, height_unit, goal, activity
         raise InputError("sex must be 'male' or 'female'")
     if goal not in GOALS:
         raise InputError("goal must be build_muscle, lose_fat or maintain")
+    experience = str(experience).lower().strip() if experience not in (None, "") else None
+    if experience is not None and experience not in EXPERIENCE_SURPLUS:
+        raise InputError("experience must be beginner, intermediate or advanced")
     if activity not in ACTIVITY:
         raise InputError("activity must be sedentary, light, moderate or heavy")
     if weight_unit not in ("lb", "kg"):
@@ -60,7 +71,11 @@ def calculate(sex, age, weight, weight_unit, height, height_unit, goal, activity
     lb = kg * LB_PER_KG
     bmr = 10 * kg + 6.25 * cm - 5 * age + (5 if sex == "male" else -161)
     maintenance = bmr * ACTIVITY[activity][0]
-    target = maintenance * (1 + GOALS[goal][0])
+    surplus, goal_note = GOALS[goal]
+    if goal == "build_muscle" and experience:
+        surplus = EXPERIENCE_SURPLUS[experience]
+        goal_note = f"a small surplus (+{surplus * 100:g}%) to build muscle with minimal fat gain"
+    target = maintenance * (1 + surplus)
 
     floored = False
     if target < FLOOR[sex]:
@@ -104,7 +119,7 @@ def calculate(sex, age, weight, weight_unit, height, height_unit, goal, activity
         "fat_g": round(fat),
         "maintenance_calories": round(maintenance / 5) * 5,
         "resting_calories": round(bmr / 5) * 5,
-        "goal_note": GOALS[goal][1],
+        "goal_note": goal_note,
         "protein_basis": protein_basis,
         "calorie_floor_applied": floored,
         "how_to_use": (

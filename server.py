@@ -196,6 +196,18 @@ WIDGET_HTML = r"""<!doctype html>
 
     <div class="row" style="margin-bottom:6px">
       <div>
+        <label for="exp">TRAINING EXPERIENCE (FOR BUILD MUSCLE)</label>
+        <select id="exp">
+          <option value="" selected>Not sure</option>
+          <option value="beginner">Beginner (under 1 year lifting)</option>
+          <option value="intermediate">Intermediate (1 to 3 years)</option>
+          <option value="advanced">Advanced (3+ years)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row" style="margin-bottom:6px">
+      <div>
         <label for="bf">BODY FAT % (OPTIONAL)</label>
         <input id="bf" type="number" inputmode="decimal" min="3" max="60" placeholder="Leave blank if you don't know" />
         <div class="hint">If you add it, protein is based on your lean mass.</div>
@@ -347,6 +359,7 @@ WIDGET_HTML = r"""<!doctype html>
       height, height_unit: units === "imperial" ? "in" : "cm",
       goal: $("goal").value, activity: $("activity").value,
     };
+    if ($("exp").value) args.experience = $("exp").value;
     const bf = num("bf");
     if (bf !== null) args.body_fat_percent = bf;
 
@@ -1024,6 +1037,18 @@ HUB_WIDGET_HTML = r"""<!doctype html>
 
     <div class="row" style="margin-bottom:6px">
       <div>
+        <label for="exp">TRAINING EXPERIENCE (FOR BUILD MUSCLE)</label>
+        <select id="exp">
+          <option value="" selected>Not sure</option>
+          <option value="beginner">Beginner (under 1 year lifting)</option>
+          <option value="intermediate">Intermediate (1 to 3 years)</option>
+          <option value="advanced">Advanced (3+ years)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row" style="margin-bottom:6px">
+      <div>
         <label for="bf">BODY FAT % (OPTIONAL)</label>
         <input id="bf" type="number" inputmode="decimal" min="3" max="60" placeholder="Leave blank if you don't know" />
         <div class="hint">If you add it, protein is based on your lean mass.</div>
@@ -1403,6 +1428,7 @@ HUB_WIDGET_HTML = r"""<!doctype html>
       height, height_unit: units === "imperial" ? "in" : "cm",
       goal: $("goal").value, activity: $("activity").value,
     };
+    if ($("exp").value) args.experience = $("exp").value;
     const bf = num("bf");
     if (bf !== null) args.body_fat_percent = bf;
 
@@ -1681,7 +1707,7 @@ def open_macro_calculator() -> dict:
     description=(
         "Use this when someone wants a daily calorie target and protein, carb and fat grams "
         "for building muscle, losing fat or maintaining weight. Needs sex, age (18+), weight, height, "
-        "goal and activity level. Body fat percent is optional. Returns estimates only, nothing is stored."
+        "goal and activity level. Body fat percent and training experience (beginner, intermediate or advanced) are optional. Returns estimates only, nothing is stored."
     ),
     annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, openWorldHint=False, idempotentHint=True),
 )
@@ -1695,10 +1721,11 @@ def calculate_macros(
     goal: Literal["build_muscle", "lose_fat", "maintain"],
     activity: Literal["sedentary", "light", "moderate", "heavy"],
     body_fat_percent: Optional[float] = None,
+    experience: Optional[Literal["beginner", "intermediate", "advanced"]] = None,
 ) -> dict:
     """Return daily calories and macros. height_unit 'in' means total inches (5 ft 10 in = 70)."""
     try:
-        return calc.calculate(sex, age, weight, weight_unit, height, height_unit, goal, activity, body_fat_percent)
+        return calc.calculate(sex, age, weight, weight_unit, height, height_unit, goal, activity, body_fat_percent, experience)
     except calc.InputError as e:
         return {"error": str(e)}
 
